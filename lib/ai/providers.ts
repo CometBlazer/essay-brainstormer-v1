@@ -26,13 +26,13 @@ const vertex = createVertex({
 
 export const myProvider = customProvider({
   languageModels: {
-    'chat-model': vertex('gemini-2.5-flash'),
+    'chat-model': vertex('gemini-2.5-pro'),
     'chat-model-reasoning': wrapLanguageModel({
       model: vertex('gemini-2.5-pro'),
       middleware: extractReasoningMiddleware({ tagName: 'think' }),
     }),
     'title-model': vertex('gemini-2.5-flash'),
-    'artifact-model': vertex('gemini-2.5-flash'),
+    'artifact-model': vertex('gemini-2.5-pro'),
   },
   imageModels: {
     'small-model': vertex.image('imagen-3.0-fast-generate-001'),
