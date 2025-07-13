@@ -202,8 +202,8 @@ export async function POST(request: Request) {
                     },
                   ],
                 });
-              } catch (_) {
-                console.error('Failed to save chat');
+              } catch (error) {
+                console.error('Failed to save chat:', error);
               }
             }
           },
@@ -234,9 +234,14 @@ export async function POST(request: Request) {
       return new Response(stream);
     }
   } catch (error) {
+    console.error('POST /api/chat error:', error);
+
     if (error instanceof ChatSDKError) {
       return error.toResponse();
     }
+
+    // Return a generic error response for any other errors
+    return new ChatSDKError('bad_request:chat').toResponse();
   }
 }
 

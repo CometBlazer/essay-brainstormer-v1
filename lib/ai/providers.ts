@@ -1,16 +1,25 @@
-import {
-  customProvider,
-  extractReasoningMiddleware,
-  wrapLanguageModel,
-} from 'ai';
-import { xai } from '@ai-sdk/xai';
-import { isTestEnvironment } from '../constants';
+import { customProvider, wrapLanguageModel } from 'ai';
+import { createVertex } from '@ai-sdk/google-vertex';
+import { extractReasoningMiddleware } from 'ai';
 import {
   artifactModel,
   chatModel,
   reasoningModel,
   titleModel,
 } from './models.test';
+import { isTestEnvironment } from '../constants';
+
+// Create custom vertex instance with direct credentials
+const vertex = createVertex({
+  project: process.env.GOOGLE_VERTEX_PROJECT || 'snappi-v1',
+  location: process.env.GOOGLE_VERTEX_LOCATION || 'us-central1',
+  googleAuthOptions: {
+    credentials: {
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+    },
+  },
+});
 
 export const myProvider = isTestEnvironment
   ? customProvider({
@@ -23,15 +32,15 @@ export const myProvider = isTestEnvironment
     })
   : customProvider({
       languageModels: {
-        'chat-model': xai('grok-2-vision-1212'),
+        'chat-model': vertex('gemini-2.5-flash'),
         'chat-model-reasoning': wrapLanguageModel({
-          model: xai('grok-3-mini-beta'),
+          model: vertex('gemini-2.5-pro'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
-        'title-model': xai('grok-2-1212'),
-        'artifact-model': xai('grok-2-1212'),
+        'title-model': vertex('gemini-2.5-flash'),
+        'artifact-model': vertex('gemini-2.5-flash'),
       },
       imageModels: {
-        'small-model': xai.image('grok-2-image'),
+        'small-model': vertex.image('imagen-3.0-fast-generate-001'),
       },
     });
