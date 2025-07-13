@@ -259,10 +259,11 @@ export const ThinkingMessage = () => {
     () => [
       { text: 'Thinking', icon: '🤔', duration: 2000, id: 'thinking' },
       { text: 'Processing', icon: '⚡', duration: 1800, id: 'processing' },
-      { text: 'Analyzing', icon: '🔍', duration: 1600, id: 'analyzing' },
-      { text: 'Generating', icon: '✨', duration: 1400, id: 'generating' },
-      { text: 'Refining', icon: '🎯', duration: 1200, id: 'refining' },
-      { text: 'Almost ready', icon: '🚀', duration: 1000, id: 'ready' },
+      { text: 'Analyzing', icon: '🔍', duration: 1800, id: 'analyzing' },
+      { text: 'Generating', icon: '✨', duration: 1600, id: 'generating' },
+      { text: 'Refining', icon: '🎯', duration: 1600, id: 'refining' },
+      { text: 'Almost ready', icon: '🚀', duration: 3000, id: 'ready' },
+      { text: 'Retrying', icon: '🔄', duration: 2000, id: 'retrying' },
     ],
     [],
   );
