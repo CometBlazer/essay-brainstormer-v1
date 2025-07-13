@@ -16,7 +16,7 @@ import {
 import { toast } from 'sonner';
 import { useLocalStorage, useWindowSize } from 'usehooks-ts';
 
-import { ArrowUpIcon, PaperclipIcon, StopIcon } from './icons';
+import { ArrowUpIcon, StopIcon } from './icons';
 import { PreviewAttachment } from './preview-attachment';
 import { Button } from './ui/button';
 import { Textarea } from './ui/textarea';
@@ -230,14 +230,7 @@ function PureMultimodalInput({
           />
         )}
 
-      <input
-        type="file"
-        className="fixed -top-4 -left-4 size-0.5 opacity-0 pointer-events-none"
-        ref={fileInputRef}
-        multiple
-        onChange={handleFileChange}
-        tabIndex={-1}
-      />
+      {/* File input removed - attachments disabled */}
 
       {(attachments.length > 0 || uploadQueue.length > 0) && (
         <div
@@ -292,7 +285,7 @@ function PureMultimodalInput({
       />
 
       <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
-        <AttachmentsButton fileInputRef={fileInputRef} status={status} />
+        {/* AttachmentsButton removed - file attachments disabled */}
       </div>
 
       <div className="absolute bottom-0 right-0 p-2 w-fit flex flex-row justify-end">
@@ -323,6 +316,8 @@ export const MultimodalInput = memo(
   },
 );
 
+/* 
+// AttachmentsButton component removed - file attachments disabled
 function PureAttachmentsButton({
   fileInputRef,
   status,
@@ -347,6 +342,7 @@ function PureAttachmentsButton({
 }
 
 const AttachmentsButton = memo(PureAttachmentsButton);
+*/
 
 function PureStopButton({
   stop,
