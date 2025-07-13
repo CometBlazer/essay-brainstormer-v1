@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "tsx lib/db/migrate && next build",
+    "build": "next build",
+    "build:with-db": "tsx lib/db/migrate && next build",
+    "db:migrate:safe": "tsx lib/db/migrate || echo 'Migration failed, continuing build'",
+    "build:safe": "pnpm run db:migrate:safe && next build",
     "start": "next start",
     "lint": "next lint && biome lint --write --unsafe",
     "lint:fix": "next lint --fix && biome lint --write --unsafe",
