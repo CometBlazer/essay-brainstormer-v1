@@ -28,6 +28,8 @@ import { ArrowDown } from 'lucide-react';
 import { useScrollToBottom } from '@/hooks/use-scroll-to-bottom';
 import type { VisibilityType } from './visibility-selector';
 
+const MAX_MESSAGE_LENGTH = 20000;
+
 function PureMultimodalInput({
   chatId,
   input,
@@ -102,7 +104,15 @@ function PureMultimodalInput({
   }, [input, setLocalStorageInput]);
 
   const handleInput = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInput(event.target.value);
+    const value = event.target.value;
+
+    // Enforce character limit on frontend
+    if (value.length > MAX_MESSAGE_LENGTH) {
+      toast.error(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`);
+      return;
+    }
+
+    setInput(value);
     adjustHeight();
   };
 
@@ -110,6 +120,17 @@ function PureMultimodalInput({
   const [uploadQueue, setUploadQueue] = useState<Array<string>>([]);
 
   const submitForm = useCallback(() => {
+    // Validate message length before submission
+    if (input.length > MAX_MESSAGE_LENGTH) {
+      toast.error(`Message cannot exceed ${MAX_MESSAGE_LENGTH} characters`);
+      return;
+    }
+
+    if (input.length === 0) {
+      toast.error('Please enter a message');
+      return;
+    }
+
     window.history.replaceState({}, '', `/chat/${chatId}`);
 
     handleSubmit(undefined, {
@@ -124,6 +145,7 @@ function PureMultimodalInput({
       textareaRef.current?.focus();
     }
   }, [
+    input,
     attachments,
     handleSubmit,
     setAttachments,
@@ -263,6 +285,13 @@ function PureMultimodalInput({
         onChange={handleInput}
         className={cx(
           'min-h-[24px] max-h-[calc(75dvh)] overflow-hidden resize-none rounded-2xl !text-base bg-muted pb-10 dark:border-zinc-700',
+          {
+            'border-red-500 dark:border-red-400':
+              input.length > MAX_MESSAGE_LENGTH * 0.9,
+            'border-yellow-500 dark:border-yellow-400':
+              input.length > MAX_MESSAGE_LENGTH * 0.8 &&
+              input.length <= MAX_MESSAGE_LENGTH * 0.9,
+          },
           className,
         )}
         rows={2}
@@ -283,6 +312,22 @@ function PureMultimodalInput({
           }
         }}
       />
+
+      {/* Character counter */}
+      <div className="absolute bottom-0 left-0 p-2 text-xs text-muted-foreground">
+        <span
+          className={cx({
+            'text-red-500': input.length > MAX_MESSAGE_LENGTH,
+            'text-yellow-500':
+              input.length > MAX_MESSAGE_LENGTH * 0.8 &&
+              input.length <= MAX_MESSAGE_LENGTH,
+            'text-green-500':
+              input.length > 0 && input.length <= MAX_MESSAGE_LENGTH * 0.8,
+          })}
+        >
+          {input.length}/{MAX_MESSAGE_LENGTH}
+        </span>
+      </div>
 
       <div className="absolute bottom-0 p-2 w-fit flex flex-row justify-start">
         {/* AttachmentsButton removed - file attachments disabled */}
@@ -377,6 +422,11 @@ function PureSendButton({
   input: string;
   uploadQueue: Array<string>;
 }) {
+  const isDisabled =
+    input.length === 0 ||
+    input.length > MAX_MESSAGE_LENGTH ||
+    uploadQueue.length > 0;
+
   return (
     <Button
       data-testid="send-button"
@@ -385,7 +435,16 @@ function PureSendButton({
         event.preventDefault();
         submitForm();
       }}
-      disabled={input.length === 0 || uploadQueue.length > 0}
+      disabled={isDisabled}
+      title={
+        input.length > MAX_MESSAGE_LENGTH
+          ? `Message exceeds ${MAX_MESSAGE_LENGTH} character limit`
+          : input.length === 0
+            ? 'Enter a message to send'
+            : uploadQueue.length > 0
+              ? 'Waiting for file upload to complete'
+              : 'Send message'
+      }
     >
       <ArrowUpIcon size={14} />
     </Button>
