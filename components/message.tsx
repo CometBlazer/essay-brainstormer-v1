@@ -258,12 +258,17 @@ export const ThinkingMessage = () => {
   const thinkingStates = useMemo(
     () => [
       { text: 'Thinking', icon: '🤔', duration: 2000, id: 'thinking' },
-      { text: 'Processing', icon: '⚡', duration: 1800, id: 'processing' },
-      { text: 'Analyzing', icon: '🔍', duration: 1800, id: 'analyzing' },
-      { text: 'Generating', icon: '✨', duration: 1600, id: 'generating' },
-      { text: 'Refining', icon: '🎯', duration: 1600, id: 'refining' },
-      { text: 'Almost ready', icon: '🚀', duration: 3000, id: 'ready' },
-      { text: 'Retrying', icon: '🔄', duration: 2000, id: 'retrying' },
+      { text: 'Processing', icon: '⚡', duration: 2000, id: 'processing' },
+      { text: 'Analyzing', icon: '🔍', duration: 2000, id: 'analyzing' },
+      { text: 'Generating', icon: '✨', duration: 1900, id: 'generating' },
+      { text: 'Refining', icon: '🎯', duration: 1900, id: 'refining' },
+      { text: 'Almost ready', icon: '🚀', duration: 5000, id: 'ready' },
+      {
+        text: 'Hmm... let me think a bit longer',
+        icon: '🔄',
+        duration: 4000,
+        id: 'retrying',
+      },
     ],
     [],
   );
