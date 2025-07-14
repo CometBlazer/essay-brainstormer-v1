@@ -20,23 +20,23 @@ function PureSuggestedActions({
   const suggestedActions = [
     {
       title: 'Help me brainstorm',
-      label: 'ideas for my essay topic',
-      action: 'Help me brainstorm ideas for my essay topic',
+      label: 'ideas for my personal statement',
+      action: 'Help me brainstorm ideas for my personal statement',
     },
     {
-      title: 'Create an outline',
-      label: 'for my argumentative essay',
-      action: 'Create an outline for my argumentative essay',
+      title: 'Walk me through',
+      label: 'writing an outline for my supplemental essay',
+      action: 'Walk me through writing an outline for my supplemental essay',
     },
     {
-      title: 'Write an introduction',
-      label: 'about climate change',
-      action: 'Write an introduction paragraph about climate change',
+      title: 'What are some common mistakes',
+      label: 'that students make when writing college essays?',
+      action: 'Help me identify common mistakes in college essays',
     },
     {
-      title: 'Improve my thesis',
-      label: 'statement structure',
-      action: 'Help me improve my thesis statement structure',
+      title: 'Give me feedback on',
+      label: 'my existing personal statement',
+      action: 'Give me feedback on my existing personal statement',
     },
   ];
 
