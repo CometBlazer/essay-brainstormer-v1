@@ -17,13 +17,13 @@ export async function sendPasswordResetEmail({
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Essay Brainstormer <noreply@haloway.co>', // Replace with your domain
+      from: 'Dan - Essay Coach <noreply@haloway.co>', // Replace with your domain
       to: [email],
-      subject: 'Reset Your Password - Essay Brainstormer',
+      subject: 'Reset Your Password: Dan - Essay Coach',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">Reset Your Password</h2>
-          <p>You requested to reset your password for your Essay Brainstormer account.</p>
+          <p>You requested to reset your password for your Dan account.</p>
           <p>Click the button below to reset your password:</p>
           <div style="text-align: center; margin: 30px 0;">
             <a href="${resetUrl}" 

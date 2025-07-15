@@ -26,7 +26,7 @@ export const Greeting = () => {
             Hi, I&apos;m Dan 👋
           </h1>
           <p className="text-zinc-500 mt-1 text-base">
-            An ethical and professional college essay coach
+            An ethical and professional AI college essay coach
           </p>
         </div>
       </motion.div>
@@ -48,7 +48,7 @@ export const Greeting = () => {
         transition={{ delay: 0.6 }}
         className="text-zinc-500 text-base sm:text-xl"
       >
-        Paste your essay prompt or choose a suggestion below. I’ll help you
+        Paste your essay prompt or choose a suggestion below. I&apos;ll help you
         brainstorm a thoughtful, authentic outline that reflects who you are.
       </motion.div>
 
@@ -59,8 +59,8 @@ export const Greeting = () => {
         transition={{ delay: 0.7 }}
         className="text-zinc-500 text-sm sm:text-base"
       >
-        Just a heads-up: I can’t write essays for you, but I’m here to guide,
-        refine, and answer any questions you have along the way.
+        Just a heads-up: I can&apos;t write essays for you, but I&apos;m here to
+        guide, refine, and answer any questions you have along the way.
       </motion.div>
     </div>
   );

@@ -8,7 +8,7 @@ export function AuthNavbar() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-xl font-bold">
-            Essay Brainstormer
+            Dan - Essay Coach
           </Link>
           <Button asChild variant="ghost" size="sm">
             <Link href="/" className="flex items-center gap-2">
