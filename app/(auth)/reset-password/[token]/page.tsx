@@ -11,9 +11,9 @@ import Link from 'next/link';
 import { AuthNavbar } from '@/components/auth-navbar';
 
 interface ResetPasswordPageProps {
-  params: {
+  params: Promise<{
     token: string;
-  };
+  }>;
 }
 
 export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
@@ -21,16 +21,22 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isValidToken, setIsValidToken] = useState<boolean | null>(null);
+  const [token, setToken] = useState<string>('');
   const router = useRouter();
 
   useEffect(() => {
-    // Validate token on component mount
-    const validateToken = async () => {
+    // Get token from params and validate
+    const initializeComponent = async () => {
       try {
+        const resolvedParams = await params;
+        const tokenValue = resolvedParams.token;
+        setToken(tokenValue);
+
+        // Validate token
         const response = await fetch(`/api/auth/validate-reset-token`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token: params.token }),
+          body: JSON.stringify({ token: tokenValue }),
         });
 
         setIsValidToken(response.ok);
@@ -39,8 +45,8 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
       }
     };
 
-    validateToken();
-  }, [params.token]);
+    initializeComponent();
+  }, [params]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +73,7 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          token: params.token,
+          token: token,
           newPassword: password,
         }),
       });
@@ -92,7 +98,9 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
         <Card className="w-full max-w-md p-8">
           <div className="text-center">
             <div className="animate-spin size-8 border-2 border-primary border-t-transparent rounded-full mx-auto" />
-            <p className="mt-4 text-muted-foreground">Validating reset link...</p>
+            <p className="mt-4 text-muted-foreground">
+              Validating reset link...
+            </p>
           </div>
         </Card>
       </div>
@@ -106,7 +114,9 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
         <div className="min-h-screen flex items-center justify-center bg-background pt-16">
           <Card className="w-full max-w-md p-8">
             <div className="text-center space-y-4">
-              <h1 className="text-2xl font-bold text-destructive">Invalid Reset Link</h1>
+              <h1 className="text-2xl font-bold text-destructive">
+                Invalid Reset Link
+              </h1>
               <p className="text-muted-foreground">
                 This password reset link is invalid or has expired.
               </p>
@@ -121,7 +131,7 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
             </div>
           </Card>
         </div>
-        </>
+      </>
     );
   }
 
@@ -133,53 +143,56 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
           <div className="space-y-6">
             <div className="text-center space-y-2">
               <h1 className="text-2xl font-bold">Reset Your Password</h1>
-            <p className="text-muted-foreground">
-              Enter your new password below.
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="password">New Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="Enter new password (min 6 characters)"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                minLength={6}
-                disabled={isLoading}
-              />
+              <p className="text-muted-foreground">
+                Enter your new password below.
+              </p>
             </div>
 
-            <div>
-              <Label htmlFor="confirm-password">Confirm New Password</Label>
-              <Input
-                id="confirm-password"
-                type="password"
-                placeholder="Confirm new password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-                minLength={6}
-                disabled={isLoading}
-              />
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="password">New Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter new password (min 6 characters)"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  disabled={isLoading}
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="confirm-password">Confirm New Password</Label>
+                <Input
+                  id="confirm-password"
+                  type="password"
+                  placeholder="Confirm new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  disabled={isLoading}
+                />
+              </div>
+
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? 'Resetting...' : 'Reset Password'}
+              </Button>
+            </form>
+
+            <div className="text-center">
+              <Link
+                href="/login"
+                className="text-sm text-muted-foreground hover:underline"
+              >
+                Back to Login
+              </Link>
             </div>
-
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Resetting...' : 'Reset Password'}
-            </Button>
-          </form>
-
-          <div className="text-center">
-            <Link href="/login" className="text-sm text-muted-foreground hover:underline">
-              Back to Login
-            </Link>
           </div>
-        </div>
-      </Card>
-    </div>
+        </Card>
+      </div>
     </>
   );
 }
