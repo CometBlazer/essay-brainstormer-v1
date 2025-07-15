@@ -10,8 +10,8 @@ import { SessionProvider } from 'next-auth/react';
 export const metadata: Metadata = {
   metadataBase: new URL('https://dan.haloway.co'),
   title: {
-    default: 'Dan - Essay Coach | AI College Essay Writing Assistant',
-    template: '%s | Dan - Essay Coach',
+    default: 'Dan by Haloway | Your Ethical AI College Essay Coach',
+    template: '%s | Dan by Haloway',
   },
   description:
     'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach. Get personalized guidance, authentic outlines, and professional feedback for your college applications.',
@@ -45,23 +45,23 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://dan.haloway.co',
-    title: 'Dan - Essay Coach | AI College Essay Writing Assistant',
+    title: 'Dan by Haloway | Your Ethical AI College Essay Coach',
     description:
       'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach. Get personalized guidance for your college applications.',
-    siteName: 'Dan - Essay Coach',
+    siteName: 'Dan by Haloway',
     images: [
       {
         url: 'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
         width: 1200,
         height: 630,
         type: 'image/png',
-        alt: 'Dan - Essay Coach - AI College Essay Writing Assistant',
+        alt: 'Dan by Haloway - Your Ethical AI College Essay Coach',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Dan - Essay Coach | AI College Essay Writing Assistant',
+    title: 'Dan by Haloway | Your Ethical AI College Essay Coach',
     description:
       'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach.',
     creator: '@danessaycoach',
@@ -132,7 +132,7 @@ const THEME_COLOR_SCRIPT = `\
 const STRUCTURED_DATA = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Dan - Essay Coach',
+  name: 'Dan by Haloway',
   description:
     'An ethical and professional AI college essay coach that helps transform ideas into compelling college essays',
   url: 'https://dan.haloway.co',

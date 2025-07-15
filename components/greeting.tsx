@@ -16,7 +16,7 @@ export const Greeting = () => {
       >
         <Image
           src="https://res.cloudinary.com/dqdasxxho/image/upload/v1752602678/dan-essay-coach-profile_r5spkl.png"
-          alt="Dan - Essay Coach"
+          alt="Dan by Haloway"
           width={128}
           height={128}
           className="rounded-full bordershadow-sm"

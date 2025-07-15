@@ -17,9 +17,9 @@ export async function sendPasswordResetEmail({
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Dan - Essay Coach <noreply@haloway.co>', // Replace with your domain
+      from: 'Dan - Essay Coach by Haloway <noreply@haloway.co>', // Replace with your domain
       to: [email],
-      subject: 'Reset Your Password: Dan - Essay Coach',
+      subject: 'Reset Your Password: Dan - Essay Coach by Haloway',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #333;">Reset Your Password</h2>
