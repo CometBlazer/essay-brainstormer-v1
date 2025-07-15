@@ -44,7 +44,8 @@ export default function Page() {
         router.push('/');
       });
     }
-  }, [state.status, router, updateSession]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.status]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get('email') as string);
