@@ -4,9 +4,10 @@ import type { UIMessage } from 'ai';
 import cx from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { memo, useState, useEffect, useMemo } from 'react';
+import Image from 'next/image';
 import type { Vote } from '@/lib/db/schema';
 import { DocumentToolCall, DocumentToolResult } from './document';
-import { PencilEditIcon, SparklesIcon } from './icons';
+import { PencilEditIcon } from './icons';
 import { Markdown } from './markdown';
 import { MessageActions } from './message-actions';
 import { PreviewAttachment } from './preview-attachment';
@@ -60,10 +61,14 @@ const PurePreviewMessage = ({
           )}
         >
           {message.role === 'assistant' && (
-            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background">
-              <div className="translate-y-px">
-                <SparklesIcon size={14} />
-              </div>
+            <div className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background overflow-hidden">
+              <Image
+                src="https://res.cloudinary.com/dqdasxxho/image/upload/v1752602678/dan-essay-coach-profile_r5spkl.png"
+                alt="AI Assistant"
+                width={32}
+                height={32}
+                className="size-full object-cover"
+              />
             </div>
           )}
 
@@ -257,11 +262,21 @@ export const ThinkingMessage = () => {
   // Memoize thinking states to prevent re-creation on every render (fixes exhaustive-deps)
   const thinkingStates = useMemo(
     () => [
-      { text: 'Thinking', icon: '🤔', duration: 2000, id: 'thinking' },
-      { text: 'Processing', icon: '⚡', duration: 2000, id: 'processing' },
-      { text: 'Analyzing', icon: '🔍', duration: 2000, id: 'analyzing' },
-      { text: 'Generating', icon: '✨', duration: 1900, id: 'generating' },
-      { text: 'Refining', icon: '🎯', duration: 1900, id: 'refining' },
+      { text: 'Hmmm', icon: '🤔', duration: 2000, id: 'thinking' },
+      { text: 'Thinking', icon: '🧠', duration: 2000, id: 'processing' },
+      { text: 'Brainstorming', icon: '⚡', duration: 2000, id: 'analyzing' },
+      {
+        text: 'Looking for answers',
+        icon: '🔍',
+        duration: 1900,
+        id: 'pondering',
+      },
+      {
+        text: 'Refining my answer',
+        icon: '✨',
+        duration: 1900,
+        id: 'refining',
+      },
       { text: 'Almost ready', icon: '🚀', duration: 5000, id: 'ready' },
       {
         text: 'Hmm... let me think a bit longer',
@@ -333,7 +348,7 @@ export const ThinkingMessage = () => {
       >
         {/* Animated AI Avatar */}
         <motion.div
-          className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background"
+          className="size-8 flex items-center rounded-full justify-center ring-1 shrink-0 ring-border bg-background overflow-hidden"
           animate={{
             scale: [1, 1.1, 1],
             rotate: [0, 5, -5, 0],
@@ -345,11 +360,17 @@ export const ThinkingMessage = () => {
           }}
         >
           <motion.div
-            className="translate-y-px"
+            className="size-full"
             animate={{ opacity: [0.7, 1, 0.7] }}
             transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }} // Fixed: use Number.POSITIVE_INFINITY
           >
-            <SparklesIcon size={14} />
+            <Image
+              src="https://res.cloudinary.com/dqdasxxho/image/upload/v1752602678/dan-essay-coach-profile_r5spkl.png"
+              alt="AI Assistant"
+              width={32}
+              height={32}
+              className="size-full object-cover"
+            />
           </motion.div>
         </motion.div>
 

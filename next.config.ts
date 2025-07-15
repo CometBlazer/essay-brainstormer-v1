@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
       {
         hostname: 'avatar.vercel.sh',
       },
+      {
+        hostname: 'res.cloudinary.com',
+        // pathname: '/dqdasxxho/image/upload/**',
+      },
     ],
   },
 };

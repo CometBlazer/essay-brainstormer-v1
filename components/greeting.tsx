@@ -1,40 +1,64 @@
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const Greeting = () => {
   return (
     <div
       key="overview"
-      className="max-w-3xl mx-auto md:mt-20 px-8 size-full flex flex-col justify-center"
+      className="max-w-3xl mx-auto md:mt-20 px-8 size-full flex flex-col justify-center items-start gap-4"
     >
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
-        transition={{ delay: 0.5 }}
-        className="text-2xl font-semibold"
+        transition={{ delay: 0.4 }}
+        className="flex items-center gap-4"
       >
-        Welcome to Ethical College Essay Brainstormer!
+        <Image
+          src="https://res.cloudinary.com/dqdasxxho/image/upload/v1752602678/dan-essay-coach-profile_r5spkl.png"
+          alt="Dan - Essay Coach"
+          width={128}
+          height={128}
+          className="rounded-full bordershadow-sm"
+        />
+        <div>
+          <h1 className="text-2xl font-semibold">Hi, I&apos;m Dan 👋</h1>
+          <p className="text-zinc-500 text-base">
+            An ethical and professional college essay coach
+          </p>
+        </div>
       </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10 }}
+        transition={{ delay: 0.5 }}
+        className="text-2xl font-medium mt-2"
+      >
+        I&apos;m here to transform your ideas into compelling college essays.
+      </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.6 }}
-        className="text-2xl text-zinc-500 mt-4"
+        className="text-zinc-500 text-xl"
       >
-        Paste your essay prompt or choose a suggestion from the options below,
-        and I will help you brainstorm an outline for an amazing, authentic
-        college essay.
+        Paste your essay prompt or choose a suggestion below. I’ll help you
+        brainstorm a thoughtful, authentic outline that reflects who you are.
       </motion.div>
+
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 10 }}
         transition={{ delay: 0.7 }}
-        className="text-lg text-zinc-500 mt-2"
+        className="text-zinc-500 text-base"
       >
-        Note that I cannot ghostwrite essays for you, but I can help answer any
-        questions you have about your drafts.
+        Just a heads-up: I can’t write essays for you, but I’m here to guide,
+        refine, and answer any questions you have along the way.
       </motion.div>
     </div>
   );
