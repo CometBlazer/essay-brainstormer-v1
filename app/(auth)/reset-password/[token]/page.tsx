@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { AuthNavbar } from '@/components/auth-navbar';
 
 interface ResetPasswordPageProps {
   params: {
@@ -100,33 +101,38 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
 
   if (!isValidToken) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Card className="w-full max-w-md p-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl font-bold text-destructive">Invalid Reset Link</h1>
-            <p className="text-muted-foreground">
-              This password reset link is invalid or has expired.
-            </p>
-            <div className="pt-4 space-y-2">
-              <Button asChild className="w-full">
-                <Link href="/forgot-password">Request New Reset Link</Link>
-              </Button>
-              <Button asChild variant="ghost" className="w-full">
-                <Link href="/login">Back to Login</Link>
-              </Button>
+      <>
+        <AuthNavbar />
+        <div className="min-h-screen flex items-center justify-center bg-background pt-16">
+          <Card className="w-full max-w-md p-8">
+            <div className="text-center space-y-4">
+              <h1 className="text-2xl font-bold text-destructive">Invalid Reset Link</h1>
+              <p className="text-muted-foreground">
+                This password reset link is invalid or has expired.
+              </p>
+              <div className="pt-4 space-y-2">
+                <Button asChild className="w-full">
+                  <Link href="/forgot-password">Request New Reset Link</Link>
+                </Button>
+                <Button asChild variant="ghost" className="w-full">
+                  <Link href="/login">Back to Login</Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        </Card>
-      </div>
+          </Card>
+        </div>
+        </>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <Card className="w-full max-w-md p-8">
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl font-bold">Reset Your Password</h1>
+    <>
+      <AuthNavbar />
+      <div className="min-h-screen flex items-center justify-center bg-background pt-16">
+        <Card className="w-full max-w-md p-8">
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold">Reset Your Password</h1>
             <p className="text-muted-foreground">
               Enter your new password below.
             </p>
@@ -174,5 +180,6 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
         </div>
       </Card>
     </div>
+    </>
   );
 }

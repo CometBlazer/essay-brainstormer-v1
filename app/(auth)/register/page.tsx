@@ -6,6 +6,7 @@ import { useActionState, useEffect, useState } from 'react';
 
 import { AuthForm } from '@/components/auth-form';
 import { SubmitButton } from '@/components/submit-button';
+import { AuthNavbar } from '@/components/auth-navbar';
 
 import { register, type RegisterActionState } from '../actions';
 import { toast } from '@/components/toast';
@@ -40,10 +41,11 @@ export default function Page() {
       toast({ type: 'success', description: 'Account created successfully!' });
 
       setIsSuccessful(true);
-      updateSession();
-      router.refresh();
+      updateSession().then(() => {
+        router.push('/');
+      });
     }
-  }, [state]);
+  }, [state, router, updateSession]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get('email') as string);
@@ -51,7 +53,9 @@ export default function Page() {
   };
 
   return (
-    <div className="flex h-dvh w-screen items-start pt-12 md:pt-0 md:items-center justify-center bg-background">
+    <>
+      <AuthNavbar />
+      <div className="flex h-dvh w-screen items-start pt-20 md:pt-0 md:items-center justify-center bg-background">
       <div className="w-full max-w-md overflow-hidden rounded-2xl gap-12 flex flex-col">
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Sign Up</h3>
@@ -74,5 +78,6 @@ export default function Page() {
         </AuthForm>
       </div>
     </div>
+    </>
   );
 }

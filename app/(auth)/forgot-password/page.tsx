@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
 import Link from 'next/link';
+import { AuthNavbar } from '@/components/auth-navbar';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -48,14 +49,16 @@ export default function ForgotPasswordPage() {
 
   if (emailSent) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <Card className="w-full max-w-md p-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-2xl font-bold">Check Your Email</h1>
-            <p className="text-muted-foreground">
-              We&apos;ve sent a password reset link to{' '}
-              <span className="font-medium">{email}</span>
-            </p>
+      <>
+        <AuthNavbar />
+        <div className="min-h-screen flex items-center justify-center bg-background pt-16">
+          <Card className="w-full max-w-md p-8">
+            <div className="text-center space-y-4">
+              <h1 className="text-2xl font-bold">Check Your Email</h1>
+              <p className="text-muted-foreground">
+                We&apos;ve sent a password reset link to{' '}
+                <span className="font-medium">{email}</span>
+              </p>
             <p className="text-sm text-muted-foreground">
               The link will expire in 1 hour. If you don&apos;t see the email, check your spam folder.
             </p>
@@ -78,19 +81,22 @@ export default function ForgotPasswordPage() {
           </div>
         </Card>
       </div>
+      </>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <Card className="w-full max-w-md p-8">
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <h1 className="text-2xl font-bold">Forgot Your Password?</h1>
-            <p className="text-muted-foreground">
-              Enter your email address and we&apos;ll send you a link to reset your password.
-            </p>
-          </div>
+    <>
+      <AuthNavbar />
+      <div className="min-h-screen flex items-center justify-center bg-background pt-16">
+        <Card className="w-full max-w-md p-8">
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h1 className="text-2xl font-bold">Forgot Your Password?</h1>
+              <p className="text-muted-foreground">
+                Enter your email address and we&apos;ll send you a link to reset your password.
+              </p>
+            </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
@@ -122,5 +128,6 @@ export default function ForgotPasswordPage() {
         </div>
       </Card>
     </div>
+    </>
   );
 }

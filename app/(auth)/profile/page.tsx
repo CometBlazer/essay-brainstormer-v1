@@ -10,6 +10,7 @@ import { Card } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { toast } from 'sonner';
 import { guestRegex } from '@/lib/constants';
+import { AuthNavbar } from '@/components/auth-navbar';
 
 interface ProfileFormData {
   email: string;
@@ -32,15 +33,18 @@ export default function ProfilePage() {
   // Redirect guests to login
   if (status === 'loading') {
     return (
-      <div className="container mx-auto py-8">
-        <div className="max-w-2xl mx-auto">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-300 rounded mb-4" />
-            <div className="h-4 bg-gray-300 rounded mb-2" />
-            <div className="h-4 bg-gray-300 rounded mb-2" />
+      <>
+        <AuthNavbar />
+        <div className="container mx-auto py-8 pt-20">
+          <div className="max-w-2xl mx-auto">
+            <div className="animate-pulse">
+              <div className="h-8 bg-gray-300 rounded mb-4" />
+              <div className="h-4 bg-gray-300 rounded mb-2" />
+              <div className="h-4 bg-gray-300 rounded mb-2" />
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 
@@ -147,14 +151,16 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <div className="max-w-2xl mx-auto space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold">Profile Settings</h1>
-          <p className="text-muted-foreground">
-            Manage your account settings and preferences.
-          </p>
-        </div>
+    <>
+      <AuthNavbar />
+      <div className="container mx-auto py-8 pt-20">
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div>
+            <h1 className="text-3xl font-bold">Profile Settings</h1>
+            <p className="text-muted-foreground">
+              Manage your account settings and preferences.
+            </p>
+          </div>
 
         {/* Email Update Section */}
         <Card className="p-6">
@@ -262,5 +268,6 @@ export default function ProfilePage() {
         </Card>
       </div>
     </div>
+    </>
   );
 }
