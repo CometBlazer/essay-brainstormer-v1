@@ -8,8 +8,75 @@ import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dan.haloway.co'),
-  title: 'Dan - Essay Coach',
-  description: 'An ethical and professional AI college essay coach',
+  title: {
+    default: 'Dan - Essay Coach | AI College Essay Writing Assistant',
+    template: '%s | Dan - Essay Coach',
+  },
+  description:
+    'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach. Get personalized guidance, authentic outlines, and professional feedback for your college applications.',
+  keywords: [
+    'college essay coach',
+    'AI essay writing',
+    'college application essays',
+    'essay brainstorming',
+    'college admissions',
+    'essay writing help',
+    'personal statement coach',
+    'college essay guidance',
+    'academic writing assistant',
+    'essay outline generator',
+  ],
+  authors: [{ name: 'Alex Wang' }],
+  creator: 'Haloway',
+  publisher: 'Haloway',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://dan.haloway.co',
+    title: 'Dan - Essay Coach | AI College Essay Writing Assistant',
+    description:
+      'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach. Get personalized guidance for your college applications.',
+    siteName: 'Dan - Essay Coach',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dan - Essay Coach - AI College Essay Writing Assistant',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dan - Essay Coach | AI College Essay Writing Assistant',
+    description:
+      'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach.',
+    images: [
+      'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
+    ],
+    creator: '@danessaycoach',
+  },
+  verification: {
+    google: 'your-google-verification-code-here',
+    // yandex: 'your-yandex-verification-code',
+    // yahoo: 'your-yahoo-verification-code',
+  },
+  alternates: {
+    canonical: 'https://dan.haloway.co',
+  },
+  category: 'Education',
+  classification: 'Education, AI Writing Assistant, College Admissions',
 };
 
 export const viewport = {
@@ -50,6 +117,41 @@ const THEME_COLOR_SCRIPT = `\
   updateThemeColor();
 })();`;
 
+const STRUCTURED_DATA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Dan - Essay Coach',
+  description:
+    'An ethical and professional AI college essay coach that helps transform ideas into compelling college essays',
+  url: 'https://dan.haloway.co',
+  applicationCategory: 'EducationalApplication',
+  operatingSystem: 'Web Browser',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    availability: 'https://schema.org/InStock',
+  },
+  creator: {
+    '@type': 'Person',
+    name: 'Dan',
+    description: 'AI Essay Coach specializing in college application essays',
+  },
+  audience: {
+    '@type': 'EducationalAudience',
+    educationalRole: 'student',
+    audienceType: 'College Applicants',
+  },
+  featureList: [
+    'AI-powered essay brainstorming',
+    'Personalized essay guidance',
+    'Authentic outline generation',
+    'College application essay coaching',
+    'Real-time writing feedback',
+  ],
+  sameAs: ['https://dan.haloway.co'],
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -69,6 +171,12 @@ export default async function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(STRUCTURED_DATA),
           }}
         />
       </head>
