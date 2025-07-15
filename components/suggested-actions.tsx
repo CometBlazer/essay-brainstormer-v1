@@ -21,7 +21,7 @@ function PureSuggestedActions({
     {
       title: 'Help me brainstorm',
       label: 'ideas for my personal statement',
-      action: 'Help me brainstorm ideas for my personal statement',
+      action: 'Help me brainstorm ideas for my common app personal statement',
     },
     {
       title: 'Walk me through',
@@ -29,9 +29,10 @@ function PureSuggestedActions({
       action: 'Walk me through writing an outline for my supplemental essay',
     },
     {
-      title: 'What are some common mistakes',
-      label: 'that students make when writing college essays?',
-      action: 'Help me identify common mistakes in college essays',
+      title: 'Help me identify common mistakes',
+      label: 'that students make when writing college essays',
+      action:
+        'What are some common mistakes that students make when writing college essays?',
     },
     {
       title: 'Give me feedback on',

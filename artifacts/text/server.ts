@@ -8,12 +8,42 @@ export const textDocumentHandler = createDocumentHandler<'text'>({
   onCreateDocument: async ({ title, dataStream }) => {
     let draftContent = '';
 
+    // Check if this is an essay coaching workspace
+    const essayKeywords = [
+      'essay workspace',
+      'essay review',
+      'essay blueprint',
+      'essay development',
+      'essay brainstorm',
+      'essay outline',
+      'essay draft',
+      'essay feedback',
+      'college essay',
+      'personal statement',
+      'supplemental essay',
+      'application essay',
+      'uc piq',
+      'common app',
+      'why us',
+      'why you',
+      'academic interest',
+    ];
+
+    const isEssayWorkspace = essayKeywords.some((keyword) =>
+      title.toLowerCase().includes(keyword),
+    );
+
+    const systemPrompt = isEssayWorkspace
+      ? 'Create a clean, minimal document workspace for college essay development. Start with basic structure: a main content section for the developing essay outline/ideas, and a notes section at the bottom if needed. Do not write an essay or provide advice - just create the workspace structure.'
+      : 'Write about the given topic. Markdown is supported. Use headings wherever appropriate.';
+
     const { fullStream } = streamText({
       model: myProvider.languageModel('artifact-model'),
-      system:
-        'Write about the given topic. Markdown is supported. Use headings wherever appropriate.',
+      system: systemPrompt,
       experimental_transform: smoothStream({ chunking: 'word' }),
-      prompt: title,
+      prompt: isEssayWorkspace
+        ? `Create a document structure titled "${title}" with sections for essay development content and notes.`
+        : title,
     });
 
     for await (const delta of fullStream) {
