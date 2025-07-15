@@ -2,10 +2,10 @@ import { Toaster } from 'sonner';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
-
 import './globals.css';
 import { SessionProvider } from 'next-auth/react';
 
+// ========== Metadata Configuration ==========
 export const metadata: Metadata = {
   metadataBase: new URL('https://dan.haloway.co'),
   title: {
@@ -53,6 +53,7 @@ export const metadata: Metadata = {
         url: 'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
         width: 1200,
         height: 630,
+        type: 'image/png',
         alt: 'Dan - Essay Coach - AI College Essay Writing Assistant',
       },
     ],
@@ -62,29 +63,37 @@ export const metadata: Metadata = {
     title: 'Dan - Essay Coach | AI College Essay Writing Assistant',
     description:
       'Transform your ideas into compelling college essays with Dan, an ethical AI essay coach.',
-    images: [
-      'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
-    ],
     creator: '@danessaycoach',
+    site: '@danessaycoach',
+    images: [
+      {
+        url: 'https://res.cloudinary.com/dqdasxxho/image/upload/v1752610512/opengraph-image_gpidac.png',
+        alt: 'Dan helping students write college essays',
+      },
+    ],
   },
   verification: {
     google: 'your-google-verification-code-here',
-    // yandex: 'your-yandex-verification-code',
-    // yahoo: 'your-yahoo-verification-code',
   },
   alternates: {
     canonical: 'https://dan.haloway.co',
   },
   category: 'Education',
   classification: 'Education, AI Writing Assistant, College Admissions',
+  // themeColor: [
+  //   { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+  //   { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  // ],
 };
 
+// ========== Viewport Settings ==========
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1, // Disable auto-zoom on mobile Safari
 };
 
+// ========== Font Setup ==========
 const geist = Geist({
   subsets: ['latin'],
   display: 'swap',
@@ -97,6 +106,7 @@ const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
 });
 
+// ========== Theme Color Script (Dynamic) ==========
 const LIGHT_THEME_COLOR = 'hsl(0 0% 100%)';
 const DARK_THEME_COLOR = 'hsl(240deg 10% 3.92%)';
 const THEME_COLOR_SCRIPT = `\
@@ -117,6 +127,7 @@ const THEME_COLOR_SCRIPT = `\
   updateThemeColor();
 })();`;
 
+// ========== Structured Data ==========
 const STRUCTURED_DATA = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
@@ -152,6 +163,7 @@ const STRUCTURED_DATA = {
   sameAs: ['https://dan.haloway.co'],
 };
 
+// ========== Root Layout ==========
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -160,25 +172,27 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      // `next-themes` injects an extra classname to the body element to avoid
-      // visual flicker before hydration. Hence the `suppressHydrationWarning`
-      // prop is necessary to avoid the React hydration mismatch warning.
-      // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
       suppressHydrationWarning
       className={`${geist.variable} ${geistMono.variable}`}
     >
       <head>
+        {/* Dynamically updates <meta name="theme-color"> based on light/dark mode */}
         <script
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,
           }}
         />
+        {/* Structured data for SEO */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(STRUCTURED_DATA),
           }}
         />
+        {/* Favicon / PWA Metadata */}
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="antialiased">
         <ThemeProvider
