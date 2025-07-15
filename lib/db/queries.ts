@@ -27,6 +27,7 @@ import {
   type DBMessage,
   type Chat,
   stream,
+  passwordResetToken,
 } from './schema';
 import type { ArtifactKind } from '@/components/artifact';
 import { generateUUID } from '../utils';
@@ -534,5 +535,80 @@ export async function getStreamIdsByChatId({ chatId }: { chatId: string }) {
       'bad_request:database',
       'Failed to get stream ids by chat id',
     );
+  }
+}
+
+export async function updateUserEmail(userId: string, newEmail: string) {
+  try {
+    return await db
+      .update(user)
+      .set({ email: newEmail })
+      .where(eq(user.id, userId));
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to update email');
+  }
+}
+
+export async function updateUserPassword(userId: string, newPassword: string) {
+  const hashedPassword = generateHashedPassword(newPassword);
+
+  try {
+    return await db
+      .update(user)
+      .set({ password: hashedPassword })
+      .where(eq(user.id, userId));
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to update password');
+  }
+}
+
+export async function createPasswordResetToken(userId: string, token: string) {
+  const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour from now
+
+  try {
+    return await db.insert(passwordResetToken).values({
+      userId,
+      token,
+      expiresAt,
+    });
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to create reset token');
+  }
+}
+
+export async function getPasswordResetToken(token: string) {
+  try {
+    return await db
+      .select()
+      .from(passwordResetToken)
+      .where(and(
+        eq(passwordResetToken.token, token),
+        eq(passwordResetToken.used, false),
+        gt(passwordResetToken.expiresAt, new Date())
+      ))
+      .limit(1);
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to get reset token');
+  }
+}
+
+export async function markPasswordResetTokenAsUsed(tokenId: string) {
+  try {
+    return await db
+      .update(passwordResetToken)
+      .set({ used: true })
+      .where(eq(passwordResetToken.id, tokenId));
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to mark token as used');
+  }
+}
+
+export async function deleteExpiredPasswordResetTokens() {
+  try {
+    return await db
+      .delete(passwordResetToken)
+      .where(lt(passwordResetToken.expiresAt, new Date()));
+  } catch (error) {
+    throw new ChatSDKError('bad_request:database', 'Failed to delete expired tokens');
   }
 }
