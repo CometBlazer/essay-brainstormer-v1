@@ -36,8 +36,8 @@ function PureSuggestedActions({
     },
     {
       title: 'Give me feedback on',
-      label: 'my existing personal statement',
-      action: 'Give me feedback on my existing personal statement',
+      label: 'my existing essay draft',
+      action: 'Give me feedback on my existing essay draft',
     },
   ];
 
