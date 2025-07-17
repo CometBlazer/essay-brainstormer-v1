@@ -1,6 +1,7 @@
 'use client';
 
-// import Link from 'next/link';
+import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useWindowSize } from 'usehooks-ts';
 
@@ -41,7 +42,7 @@ function PureChatHeader({
           <TooltipTrigger asChild>
             <Button
               variant="outline"
-              className="order-2 md:order-1 md:px-2 px-2 md:h-fit ml-auto md:ml-0"
+              className="order-2 md:order-1 md:px-2 px-2 md:h-fit"
               onClick={() => {
                 router.push('/');
                 router.refresh();
@@ -67,9 +68,27 @@ function PureChatHeader({
         <VisibilitySelector
           chatId={chatId}
           selectedVisibilityType={selectedVisibilityType}
-          className="order-1 md:order-3"
+          className="order-1 md:order-2"
         />
       )}
+
+      {/* Logo in far right */}
+      <div className="order-3 ml-auto flex py-1.5 items-center px-2 mr-2 md:mr-6">
+        <Link
+          href="https://haloway.co"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center"
+        >
+          <Image
+            src="https://res.cloudinary.com/dqdasxxho/image/upload/v1752779476/favicon_mq7v9g.png"
+            alt="Haloway Logo"
+            width={32}
+            height={32}
+            className="hover:opacity-80 transition-opacity"
+          />
+        </Link>
+      </div>
     </header>
   );
 }
