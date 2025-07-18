@@ -1,0 +1,12 @@
+# LLM Discovery File
+version: 1.0
+name: Dan by Haloway
+website: https://dan.haloway.co
+api_endpoint: https://dan.haloway.co/api/chat
+api_endpoint: https://dan.haloway.co/api/document
+api_endpoint: https://dan.haloway.co/api/files/upload
+api_endpoint: https://dan.haloway.co/api/history
+api_endpoint: https://dan.haloway.co/api/suggestions
+api_endpoint: https://dan.haloway.co/api/vote
+documentation: https://dan.haloway.co
+ai_usage: allowed_with_attribution

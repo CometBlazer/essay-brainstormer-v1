@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "contact": {
+    "email": "alex@haloway.co"
+  },
+  "name_for_model": "Dan by Haloway",
+  "description_for_model": "Dan is a personalized AI writing coach by Haloway that guides students through brainstorming and improving college essays.",
+  "documentation_url": "https://dan.haloway.co",
+  "llm_endpoints": [
+    "https://dan.haloway.co/api/chat",
+    "https://dan.haloway.co/api/document",
+    "https://dan.haloway.co/api/files/upload",
+    "https://dan.haloway.co/api/history",
+    "https://dan.haloway.co/api/suggestions",
+    "https://dan.haloway.co/api/vote"
+  ],
+  "usage_policy": {
+    "commercial_use": "allowed_with_attribution",
+    "personal_use": "allowed",
+    "ai_training": "disallowed"
+  }
+}
