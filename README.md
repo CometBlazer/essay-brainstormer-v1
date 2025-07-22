@@ -1,62 +1,54 @@
-<a href="https://chat.vercel.ai/">
-  <img alt="Next.js 14 and App Router-ready AI chatbot." src="app/(chat)/opengraph-image.png">
-  <h1 align="center">Chat SDK</h1>
-</a>
+# Dan by Haloway – Ethical AI College Essay Coach
 
-<p align="center">
-    Chat SDK is a free, open-source template built with Next.js and the AI SDK that helps you quickly build powerful chatbot applications.
-</p>
+**Dan is an ethical, conversational AI assistant that helps students brainstorm, organize, and refine authentic college essays, without writing them for students.**
 
-<p align="center">
-  <a href="https://chat-sdk.dev"><strong>Read Docs</strong></a> ·
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#model-providers"><strong>Model Providers</strong></a> ·
-  <a href="#deploy-your-own"><strong>Deploy Your Own</strong></a> ·
-  <a href="#running-locally"><strong>Running locally</strong></a>
-</p>
-<br/>
+🔗 [dan.haloway.co](https://dan.haloway.co)
 
-## Features
+---
 
-- [Next.js](https://nextjs.org) App Router
-  - Advanced routing for seamless navigation and performance
-  - React Server Components (RSCs) and Server Actions for server-side rendering and increased performance
-- [AI SDK](https://sdk.vercel.ai/docs)
-  - Unified API for generating text, structured objects, and tool calls with LLMs
-  - Hooks for building dynamic chat and generative user interfaces
-  - Supports xAI (default), OpenAI, Fireworks, and other model providers
-- [shadcn/ui](https://ui.shadcn.com)
-  - Styling with [Tailwind CSS](https://tailwindcss.com)
-  - Component primitives from [Radix UI](https://radix-ui.com) for accessibility and flexibility
-- Data Persistence
-  - [Neon Serverless Postgres](https://vercel.com/marketplace/neon) for saving chat history and user data
-  - [Vercel Blob](https://vercel.com/storage/blob) for efficient file storage
-- [Auth.js](https://authjs.dev)
-  - Simple and secure authentication
+## Overview
 
-## Model Providers
+Dan is a human-centered AI coach built into the [Haloway college essay](https://haloway.co) platform. Unlike typical AI generators, Dan is grounded in academic integrity, offering structured guidance without generating full essay responses. Whether it’s the Common App personal statement or UC PIQs, Dan helps students develop and articulate their ideas while keeping the writing process entirely their own.
 
-This template ships with [xAI](https://x.ai) `grok-2-1212` as the default chat model. However, with the [AI SDK](https://sdk.vercel.ai/docs), you can switch LLM providers to [OpenAI](https://openai.com), [Anthropic](https://anthropic.com), [Cohere](https://cohere.com/), and [many more](https://sdk.vercel.ai/providers/ai-sdk-providers) with just a few lines of code.
+---
 
-## Deploy Your Own
+## Key Features
 
-You can deploy your own version of the Next.js AI Chatbot to Vercel with one click:
+- **Prompt Recognition**  
+  Automatically identifies essay types (e.g., UC PIQs, Common App) and adjusts coaching strategies.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fai-chatbot&env=AUTH_SECRET&envDescription=Learn+more+about+how+to+get+the+API+Keys+for+the+application&envLink=https%3A%2F%2Fgithub.com%2Fvercel%2Fai-chatbot%2Fblob%2Fmain%2F.env.example&demo-title=AI+Chatbot&demo-description=An+Open-Source+AI+Chatbot+Template+Built+With+Next.js+and+the+AI+SDK+by+Vercel.&demo-url=https%3A%2F%2Fchat.vercel.ai&products=%5B%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22ai%22%2C%22productSlug%22%3A%22grok%22%2C%22integrationSlug%22%3A%22xai%22%7D%2C%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22neon%22%2C%22integrationSlug%22%3A%22neon%22%7D%2C%7B%22type%22%3A%22integration%22%2C%22protocol%22%3A%22storage%22%2C%22productSlug%22%3A%22upstash-kv%22%2C%22integrationSlug%22%3A%22upstash%22%7D%2C%7B%22type%22%3A%22blob%22%7D%5D)
+- **Conversational Brainstorming**  
+  Uses Socratic-style questioning to prompt self-reflection and help students uncover compelling personal stories.
 
-## Running locally
+- **Outline Assistance**  
+  Guides students in organizing ideas into a structured, authentic essay outline.
 
-You will need to use the environment variables [defined in `.env.example`](.env.example) to run Next.js AI Chatbot. It's recommended you use [Vercel Environment Variables](https://vercel.com/docs/projects/environment-variables) for this, but a `.env` file is all that is necessary.
+- **Ethical Guardrails**  
+  Never writes for the student—emphasizes originality, student ownership, and transparency.
 
-> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your various AI and authentication provider accounts.
+- **Phase-Based Coaching**  
+  Five-phase model:  
+  `1. Prompt Analysis → 2. Idea Generation → 3. Outline Building → 4. Refining → 5. Polishing`
 
-1. Install Vercel CLI: `npm i -g vercel`
-2. Link local instance with Vercel and GitHub accounts (creates `.vercel` directory): `vercel link`
-3. Download your environment variables: `vercel env pull`
+---
 
-```bash
-pnpm install
-pnpm dev
-```
+## Tech Stack
 
-Your app template should now be running on [localhost:3000](http://localhost:3000).
+| Tech                   | Purpose                                                   |
+|------------------------|-----------------------------------------------------------|
+| **Next.js 14**         | App Router for routing, server functions, and performance |
+| **Vercel AI SDK**      | Handles streaming and prompt handling with Gemini         |
+| **chat-sdk Template**  | Provides foundational UI and backend structure for chat   |
+| **Gemini API**         | Powers Dan's conversational coaching                      |
+| **Neon + Postgres**    | Stores prompts, outlines, and session data                |
+| **shadcn/ui + Tailwind CSS** | UI design and accessibility                        |
+
+---
+
+## Challenges
+
+- **Ethical AI Design**  
+  Balancing usefulness with integrity—no essay writing, only coaching.
+
+- **Prompt Engineering**  
+  Carefully designed prompt templates to maximize reflection, not completion.
