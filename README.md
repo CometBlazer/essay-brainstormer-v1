@@ -45,6 +45,19 @@ Dan is a human-centered AI coach built into the [Haloway college essay](https://
 
 ---
 
+## Getting Started (Local Development)
+
+Dan is based on the Vercel AI Chat-SDK Template. Follow these steps to run the app locally:
+
+```bash
+git clone https://github.com/CometBlazer/essay-brainstormer-v1.git
+cd essay-brainstormer-v1
+npm install
+npm run dev
+```
+
+Make sure you make a copy of `.env.example` and set up your API keys.
+
 ## Challenges
 
 - **Ethical AI Design**  
